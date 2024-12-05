@@ -83,3 +83,18 @@ def dataDeleteProduct(id):
         .execute()
     )
     return response.data
+
+
+def data_filter_products(category_id: int = 0):
+    """Filter products by category id. Default returns all products."""
+    query = (
+        supabase.table("product")
+        .select("*, category(name)")
+        .order("title", desc=False)
+    )
+
+    if category_id:
+        query = query.eq("category_id", category_id)
+
+    response = query.execute()
+    return response.data
