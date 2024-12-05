@@ -54,7 +54,12 @@
                         <legend>Add a new product</legend>
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Category</label>
-                            <input type="text" class="form-control" id="category_id" name="category_id" required>
+                            <select class="form-select" id="category_id" name="category_id" required>
+                               <option value="">Select a Category</option>
+                               {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                               {% endfor %}
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
