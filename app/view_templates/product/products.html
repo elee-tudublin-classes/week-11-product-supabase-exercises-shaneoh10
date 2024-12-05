@@ -18,10 +18,23 @@
                 <h5>Categories</h5>
                 <!-- https://getbootstrap.com/docs/5.3/components/list-group/#links-and-buttons -->
                 <div class="list-group">
+                    <a href="#" 
+                        class="list-group-item list-group-item-action" 
+                        hx-get="/product/filter/0/"
+                        hx-target="#productList" 
+                        hx-swap="innerHTML">
+                        All
+                    </a>
                     {% for category in categories %}
-                        <a href="#" class="list-group-item list-group-item-action">{{ category.name }}</a>
+                        <a href="#" 
+                           class="list-group-item list-group-item-action" 
+                           hx-get="/product/filter/{{ category.id }}/"
+                           hx-target="#productList" 
+                           hx-swap="innerHTML">
+                            {{ category.name }}
+                        </a>
                     {% endfor %}
-                    </div>
+                </div>
 
             </div>
             <div class="col-10">
@@ -54,7 +67,12 @@
                         <legend>Add a new product</legend>
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Category</label>
-                            <input type="text" class="form-control" id="category_id" name="category_id" required>
+                            <select class="form-select" id="category_id" name="category_id" required>
+                               <option value="">Select a Category</option>
+                               {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                               {% endfor %}
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>

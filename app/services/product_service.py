@@ -29,3 +29,9 @@ def updateProduct(input: Product) :
 
 def deleteProduct(id : int) :
     result = dataDeleteProduct(id)
+
+
+def get_filtered_products(category_id: int = 0):
+    products = data_filter_products(category_id)
+
+    return products
