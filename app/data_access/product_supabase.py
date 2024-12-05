@@ -53,8 +53,14 @@ def dataAddProduct(product: Product) :
         .insert(product.model_dump(exclude_unset=True))
         .execute()
     )
-    # result is 1st item in the list
-    return response.data[0]
+
+    new_product = (
+        supabase.table("product")
+        .select("*, category(name)")
+        .eq("id", response.data[0]["id"])
+        .execute()
+    )
+    return new_product.data[0]
 
 # get all categories
 def dataGetCategories():
